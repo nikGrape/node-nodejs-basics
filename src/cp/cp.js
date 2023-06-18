@@ -9,12 +9,8 @@ const script_path = path.join(__dirname, 'files', 'script.js');
 
 const spawnChildProcess = async (args) => {
 	// Write your code here
-	const childProcess = spawn('node', [script_path, ...args], {
-		stdio: ['pipe', 'pipe', process.stderr],
-	});
-	process.stdin.pipe(childProcess.stdin);
-	childProcess.stdout.on('data', (data) => {
-		process.stdout.write(data);
+	spawn('node', [script_path, ...args], {
+		stdio: [process.stdin, process.stdout, process.stderr],
 	});
 };
 
